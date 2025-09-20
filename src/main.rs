@@ -9,6 +9,7 @@ const FAHRENHEIT_OFFSET: f64 = 32.0;
 const KELVIN_OFFSET: f64 = 273.15;
 
 
+
 //###############
 //#   IMPORTS   #
 //###############
@@ -96,11 +97,14 @@ fn main() {
 
 //----Get needed value from string----
 fn get_value<T: FromStr>() -> T {
+    //--Buffer for storing input--
     let mut buffer = String::new();
 
     loop {
+        //--Read line from stdin--
         match io::stdin().read_line(&mut buffer) {
             Ok(_) => {
+                //--Trimming and parsing input--
                 match buffer.trim().parse::<T>() {
                     Ok(num) => return num,
                     _ => {
@@ -118,15 +122,18 @@ fn get_value<T: FromStr>() -> T {
 
 //----Print function that i find more convenient----
 fn print<T: Display>(display: T, newline: bool, error: bool) {
+    //--Printing to stdout or stderr--
     if error {
         eprint!("{}", display);
     } else {
         print!("{}", display);
     }
 
+    //--Newline--
     if newline {
         print!("\n");
     }
 
+    //--Flushing output (to ensure prompt appears before input)--
     io::stdout().flush().unwrap();
 }
