@@ -68,7 +68,10 @@ fn bin_search(array: &[i32], target: i32) -> Option<(i32, usize)> {
             //--Matching middle value with target value--
             match mid_value.cmp(&target) {
                 Ordering::Equal => return Some((mid_value, mid)),
-                Ordering::Greater => high = mid - 1,
+                Ordering::Greater => high = match mid.checked_sub(1) {
+                    Some(result) => result,
+                    _ => return None
+                },
                 Ordering::Less => low = mid + 1
             }
         }
