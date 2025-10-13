@@ -8,3 +8,7 @@ fn main() {
     let random = random().value;
     println!("Hello, World!\n{random}");
 }
+
+pub fn shared() {
+    println!("shared!");
+}
