@@ -1,14 +1,10 @@
 #![warn(clippy::all, clippy::pedantic)]
 
-mod pseudo_generator {
-    pub fn random() -> u8 {
-        255
-    }
-}
+mod pseudo_generator;
 
 use pseudo_generator::random;
 
 fn main() {
-    let random = random();
+    let random = random().value;
     println!("Hello, World!\n{random}");
 }
