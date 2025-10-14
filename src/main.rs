@@ -12,11 +12,5 @@ fn main() {
 
     current_path.push("resources/");
 
-    match create_dir_all(&current_path) {
-        Ok(()) => println!("Path {} created successfully!", current_path.display()),
-        Err(e) => match e.kind() {
-            ErrorKind::InvalidFilename => panic!("Invalid filename!"),
-            _ => panic!("unknown!"),
-        },
-    }
+    create_dir_all(&current_path).unwrap_or_else(|e| panic!("Error: {e:?}"));
 }
