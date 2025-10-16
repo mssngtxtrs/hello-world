@@ -1,7 +1,7 @@
 #![warn(clippy::all, clippy::pedantic)]
 
 use std::marker::Copy;
-use std::ops::Add;
+use std::ops::{Add, Mul, Sub};
 
 // Trait
 trait Drive {
@@ -14,6 +14,11 @@ struct Employee<T, K> {
     age: T,
     salary: K,
     tax: K,
+}
+impl<T, K: Copy + Sub<Output = K> + Mul<Output = K>> Employee<T, K> {
+    fn salary_with_tax(&self) -> K {
+        self.salary - (self.salary - self.tax)
+    }
 }
 
 // Structures with trait implementations
@@ -55,6 +60,7 @@ fn main() {
     let car = Car { gas: 0 };
 
     println!("{employee:?}");
+    println!("{}", employee.salary_with_tax());
     car_info(&car, &electric_car);
 }
 
