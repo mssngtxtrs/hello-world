@@ -64,6 +64,14 @@ fn car_info<T: Drive, U: Drive>(car: &T, other_car: &U) {
     println!("Can other car drive? {}", other_car.can_drive());
 }
 
-fn sum<T: Copy + Add<Output = T>>(numbers: &[T]) -> T {
+//fn sum<T: Copy + Add<Output = T>>(numbers: &[T]) -> T {
+//    numbers.iter().copied().reduce(|acc, n| acc + n).unwrap()
+//}
+
+// Alternative spelling
+fn sum<T>(numbers: &[T]) -> T
+where
+    T: Copy + Add<Output = T>,
+{
     numbers.iter().copied().reduce(|acc, n| acc + n).unwrap()
 }
